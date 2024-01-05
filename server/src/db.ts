@@ -11,8 +11,8 @@ async function initDb() {
   try {
     await mongoose.connect(connectionString);
     dbDebug("Connected to MongoDB");
-  } catch (e) {
-    dbDebug("Error connecting to MongoDB");
+  } catch (error) {
+    dbDebug(error);
   }
 }
 

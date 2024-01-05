@@ -42,4 +42,9 @@ async function loadDummyData() {
   }
 }
 
+export async function initDbWithDummyData() {
+  await initDb();
+  await loadDummyData();
+}
+
 export default initDb;

@@ -2,7 +2,7 @@ import express from "express";
 import debug from "debug";
 
 const appDebug = debug("lease-nxt:app");
-appDebug("Starting application");
+appDebug("Creating an express application");
 const app = express();
 
 appDebug("Applying middlewares");

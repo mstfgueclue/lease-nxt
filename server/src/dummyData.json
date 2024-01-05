@@ -1,0 +1,36 @@
+[
+  {
+    "title": "Elegant Apartment in Innere Stadt",
+    "description": "Charming 3-bedroom apartment in Vienna's historic Innere Stadt. Features classic Viennese architecture with modern amenities, high ceilings, and a fully-equipped kitchen. Walking distance to St. Stephen's Cathedral and the State Opera.",
+    "location": {
+      "address": "Graben 101, 1010 Wien",
+      "city": "Vienna",
+      "country": "Austria",
+      "postalCode": "1010"
+    },
+    "size": 150,
+    "price": 10000000,
+    "images": [],
+    "owner": "owner-12345",
+    "transactionStatus": "Available",
+    "listedDate": "2024-01-15T00:00:00.000Z",
+    "propertyType": "Apartment"
+  },
+  {
+    "title": "Modern Loft Near Mariahilfer Straße",
+    "description": "A contemporary loft with an open floor plan, located near Vienna's bustling Mariahilfer Straße shopping district. This 2-bedroom loft features a spacious living area, modern decor, and a rooftop terrace with panoramic city views.",
+    "location": {
+      "address": "Mariahilfer Straße 78, 1070 Wien",
+      "city": "Vienna",
+      "country": "Austria",
+      "postalCode": "1070"
+    },
+    "size": 120,
+    "price": 1250000,
+    "images": [],
+    "owner": "owner-67890",
+    "transactionStatus": "Pending",
+    "listedDate": "2024-01-20T00:00:00.000Z",
+    "propertyType": "Apartment"
+  }
+]

@@ -1,7 +1,9 @@
 import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
+import debug from "debug";
 
 dotenv.config();
+const dbDebug = debug("lease-nxt:db");
 
 async function initDb() {
   const connectionString = process.env.ATLAS_URI || "";
@@ -9,9 +11,9 @@ async function initDb() {
 
   try {
     await client.connect();
-    console.log("Connected to MongoDB");
+    dbDebug("Connected to MongoDB");
   } catch (e) {
-    console.error(e);
+    dbDebug("Error connecting to MongoDB");
   }
 }
 

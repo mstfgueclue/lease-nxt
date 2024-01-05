@@ -1,0 +1,26 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore generated build or compiled files
+dist/
+build/
+out/
+
+# Ignore environment configuration files
+.env
+
+# Ignore user-specific configuration files
+*.config.js
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore package-lock.json (if using npm)
+package-lock.json
+
+# Ignore Yarn lock file (if using Yarn)
+yarn.lock
+
+# Ignore IDE or editor-specific files
+.vscode/
+.idea/

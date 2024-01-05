@@ -1,16 +1,15 @@
-import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 import debug from "debug";
+import mongoose from "mongoose";
 
 dotenv.config();
 const dbDebug = debug("lease-nxt:db");
 
 async function initDb() {
   const connectionString = process.env.ATLAS_URI || "";
-  const client = new MongoClient(connectionString);
 
   try {
-    await client.connect();
+    await mongoose.connect(connectionString);
     dbDebug("Connected to MongoDB");
   } catch (e) {
     dbDebug("Error connecting to MongoDB");

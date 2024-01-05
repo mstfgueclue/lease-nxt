@@ -5,8 +5,8 @@ const appDebug = debug("lease-nxt:app");
 appDebug("Creating an express application");
 const app = express();
 
-appDebug("Applying middlewares");
 // Middleware
+appDebug("Applying middlewares");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

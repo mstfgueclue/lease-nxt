@@ -1,18 +1,21 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { RegisterProperty } from "./property/components/RegisterProperty";
+import RegisterProperty from "./property/components/RegisterProperty";
+import { ViewProperties } from "./property/components/ViewProperties";
+import { Login } from "./auth/components/Login";
+import { SignUp } from "./auth/components/SignUp";
 
 function App() {
-  const handleRegister = (name: string, rent: number) => {
-    console.log("Registering property:", name, rent);
-    // Integrate with backend here
-  };
-
   return (
     <div className="App">
-      <header className="App-header mb-20">
-        <h1>Real Estate Rental</h1>
-      </header>
-      <RegisterProperty onRegister={handleRegister} />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/list-properties" element={<RegisterProperty />} />
+          <Route path="/view-properties" element={<ViewProperties />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/sign-up" element={<SignUp />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

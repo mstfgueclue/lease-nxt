@@ -1,60 +1,105 @@
-import React, { useState, FunctionComponent } from "react";
+import React, { useState } from "react";
+import { MainAppBarLayout } from "../../common/components/MainAppBarLayout";
 
-interface RegisterPropertyProps {
-  onRegister: (name: string, rent: number) => void;
-}
+const RegisterProperty: React.FC = () => {
+  const [property, setProperty] = useState({
+    name: "",
+    description: "",
+    rent: "",
+    location: "",
+  });
 
-export const RegisterProperty: FunctionComponent<RegisterPropertyProps> = ({
-  onRegister,
-}) => {
-  const [name, setName] = useState<string>("");
-  const [rent, setRent] = useState<string>("");
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setProperty({ ...property, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onRegister(name, parseFloat(rent));
+    console.log(property);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form">
-      <div className="mb-4">
-        <label
-          htmlFor="name"
-          className="block text-white-700 text-sm font-bold mb-2"
-        >
-          Property Name
-        </label>
-        <input
-          type="text"
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-white-200 leading-tight focus:outline-none focus:shadow-outline"
-        />
+    <MainAppBarLayout>
+      <div className="max-w-xl mx-auto p-14 bg-white shadow-lg rounded">
+        <form onSubmit={handleSubmit} className="space-y-8">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-8">
+            Register Property
+          </h2>
+          <div>
+            <label
+              htmlFor="name"
+              className="text-sm block text-left font-medium text-gray-700"
+            >
+              Property Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={property.name}
+              onChange={handleChange}
+              className="mt-1 block w-full px-16 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="description"
+              className="text-sm block text-left font-medium text-gray-700"
+            >
+              Description
+            </label>
+            <textarea
+              name="description"
+              id="description"
+              value={property.description}
+              onChange={handleChange}
+              className="mt-1 block w-full px-16 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="rent"
+              className="text-sm block text-left font-medium text-gray-700"
+            >
+              Rent Amount
+            </label>
+            <input
+              type="text"
+              name="rent"
+              id="rent"
+              value={property.rent}
+              onChange={handleChange}
+              className="mt-1 block w-full px-16 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="location"
+              className="text-sm block text-left font-medium text-gray-700"
+            >
+              Location
+            </label>
+            <input
+              type="text"
+              name="location"
+              id="location"
+              value={property.location}
+              onChange={handleChange}
+              className="mt-1 block w-full px-16 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full py-2 px-16 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Submit
+          </button>
+        </form>
       </div>
-      <div className="mb-6">
-        <label
-          htmlFor="rent"
-          className="block text-white-700 text-sm font-bold mb-2"
-        >
-          Rent Amount
-        </label>
-        <input
-          type="number"
-          id="rent"
-          value={rent}
-          onChange={(e) => setRent(e.target.value)}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-white-200 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-        />
-      </div>
-      <div className="flex items-center justify-between">
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
-          Register Property
-        </button>
-      </div>
-    </form>
+    </MainAppBarLayout>
   );
 };
+
+export default RegisterProperty;

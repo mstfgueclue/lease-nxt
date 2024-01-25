@@ -14,15 +14,12 @@ export const MainAppBarLayout: React.FC<MainAppBarLayoutProps> = ({
         <div className="max-w-7xl mx-auto flex justify-between">
           <div>
             <Link
-              to="/list-properties"
+              to="/register-properties"
               className="hover:bg-blue-200 px-3 py-2 rounded"
             >
               List Properties
             </Link>
-            <Link
-              to="/view-properties"
-              className="hover:bg-blue-200 px-3 py-2 rounded"
-            >
+            <Link to="/" className="hover:bg-blue-200 px-3 py-2 rounded">
               View Properties
             </Link>
           </div>
@@ -36,7 +33,7 @@ export const MainAppBarLayout: React.FC<MainAppBarLayoutProps> = ({
           </div>
         </div>
       </div>
-      <div className="content"> {children}</div>
+      <div className="content max-w-5xl mx-auto mt-16"> {children}</div>
     </div>
   );
 };

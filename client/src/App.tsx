@@ -1,20 +1,20 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import RegisterProperty from "./property/components/RegisterProperty";
-import { ViewProperties } from "./property/components/ViewProperties";
-import { Login } from "./auth/components/Login";
-import { SignUp } from "./auth/components/SignUp";
+import { Footer } from "./common/components/Footer";
+import { Header } from "./common/components/Header";
+import { Home } from "./common/components/Home";
 
 function App() {
   return (
-    <div className="App">
+    <div className="max-w-[1440p] mx-auto bg-white">
       <BrowserRouter>
+        <Header />
+
         <Routes>
-          <Route path="/list-properties" element={<RegisterProperty />} />
-          <Route path="/view-properties" element={<ViewProperties />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/" element={<Home />} />
         </Routes>
+
+        <Footer />
       </BrowserRouter>
     </div>
   );

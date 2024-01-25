@@ -1,0 +1,34 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "hot-compile",
+      "group": "build",
+      "label": "hot-compile-command",
+      "detail": "starts the watcher",
+      "isBackground": true,
+      "problemMatcher": [
+        {
+          "pattern": [
+            {
+              "regexp": ".",
+              "file": 1,
+              "location": 2,
+              "message": 3
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".",
+            "endsPattern": "Watching for file changes."
+          }
+        }
+      ]
+    },
+    {
+      "label": "hot-compile-task",
+      "dependsOn": ["hot-compile-command"]
+    }
+  ]
+}

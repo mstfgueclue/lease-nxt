@@ -1,13 +1,25 @@
 import { Request, Response } from "express";
 import * as propertyService from "./PropertyService";
+import { Property, PropertyType, TransactionStatus } from "./PropertySchema";
 
 export async function registerProperty(
   req: Request,
   res: Response
 ): Promise<void> {
   try {
-    const { from, name, rent } = req.body;
-    await propertyService.registerProperty(from, name, rent);
+    const { from, title, description, location, size, price } = req.body;
+    const property: Property = {
+      title,
+      description,
+      location,
+      owner: from,
+      size,
+      price,
+      listedDate: new Date(),
+      transactionStatus: TransactionStatus.Available,
+      propertyType: PropertyType.Apartment,
+    };
+    await propertyService.registerProperty(property);
 
     res.json({ message: "Property registered successfully" });
   } catch (error) {

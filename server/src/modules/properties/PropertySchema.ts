@@ -18,15 +18,10 @@ export enum PropertyType {
   Other = "Other",
 }
 
-export interface Property extends Document {
+export interface Property {
   title: string;
   description: string;
-  location: {
-    address: string;
-    city: string;
-    country: string;
-    postalCode: string;
-  };
+  location: string;
   owner: string;
   size: number;
   price: number;
@@ -36,16 +31,13 @@ export interface Property extends Document {
   images?: string[];
 }
 
+export interface PropertyDocument extends Property, Document {}
+
 const PropertySchema: Schema = new Schema(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },
-    location: {
-      address: { type: String, required: true },
-      city: { type: String, required: true },
-      country: { type: String, required: true },
-      postalCode: { type: String, required: true },
-    },
+    location: { type: String, required: true },
     owner: { type: String, required: true },
     size: { type: Number, required: true },
     price: { type: Number, required: true },
@@ -59,6 +51,7 @@ const PropertySchema: Schema = new Schema(
     propertyType: {
       type: String,
       enum: Object.values(PropertyType),
+      default: PropertyType.Apartment,
       required: true,
     },
     images: { type: [String] },
@@ -68,7 +61,7 @@ const PropertySchema: Schema = new Schema(
   }
 );
 
-const PropertyModel = mongoose.model<Property>(
+const PropertyModel = mongoose.model<PropertyDocument>(
   "Property",
   PropertySchema,
   "properties"

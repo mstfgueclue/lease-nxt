@@ -22,5 +22,4 @@ package-lock.json
 yarn.lock
 
 # Ignore IDE or editor-specific files
-.vscode/
 .idea/

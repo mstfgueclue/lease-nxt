@@ -7,7 +7,7 @@ export const Header = () => {
       <div className="container mx-auto flex justify-between items-center">
         {/* logo */}
         <Link to="/">
-          <img src={Logo} alt="Logo" className="w-20 h-auto" />
+          <img src={Logo} alt="Logo" className="w-20 h-auto rounded-lg" />
         </Link>
         {/* buttons */}
         <div className="flex items-center gap-6">

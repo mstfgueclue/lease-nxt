@@ -17,14 +17,20 @@ export enum PropertyType {
 }
 
 export interface Property {
+  _id: string;
   title: string;
   description: string;
-  location: string;
   owner: string;
-  size: number;
   price: number;
-  // listedDate: Date;
-  // transactionStatus: TransactionStatus;
-  // propertyType: PropertyType;
-  // images?: string[];
+
+  country: string;
+  address: string;
+  bedrooms: number;
+  bathrooms: number;
+  surface: number;
+  type: PropertyType;
+
+  listedDate: Date;
+  transactionStatus: TransactionStatus;
+  images?: string[];
 }

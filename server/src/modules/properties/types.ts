@@ -37,12 +37,12 @@ export const PropertyABI = {
         },
         {
           internalType: "string",
-          name: "name",
+          name: "title",
           type: "string",
         },
         {
           internalType: "uint256",
-          name: "rent",
+          name: "price",
           type: "uint256",
         },
         {
@@ -59,12 +59,12 @@ export const PropertyABI = {
       inputs: [
         {
           internalType: "string",
-          name: "_name",
+          name: "_title",
           type: "string",
         },
         {
           internalType: "uint256",
-          name: "_rent",
+          name: "_price",
           type: "uint256",
         },
       ],

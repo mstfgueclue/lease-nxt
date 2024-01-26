@@ -31,7 +31,6 @@ body {
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
   @apply bg-gray-100 text-gray-800;
   font-size: 87.5%;
 }

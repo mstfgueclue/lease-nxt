@@ -4,8 +4,8 @@
   "description": "Backend for LeaseNXT",
   "main": "src/server.ts",
   "scripts": {
-    "start": "tsc && DEBUG=lease-nxt:* node dist/src/server.js",
-    "hot-start": "DEBUG=lease-nxt:* nodemon --delay 1 --watch dist -e js dist/src/server.js",
+    "start": "tsc && SET DEBUG=lease-nxt:* & node dist/src/server.js",
+    "hot-start": "SET DEBUG=lease-nxt:* & nodemon --delay 1 --watch dist -e js dist/src/server.js",
     "hot-compile": "tsc -w",
     "dev": "tsc -w",
     "build": "tsc",

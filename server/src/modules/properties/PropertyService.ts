@@ -6,7 +6,7 @@ import { Property } from "./PropertySchema";
 dotenv.config();
 
 const web3 = new Web3(process.env.GANACHE_URL);
-const contractAddress = "0x253350cd18f00319896EF1Df07D50bDf619fB77a";
+const contractAddress = process.env.REGISTER_PROPERTY_CONTRACT_ADDRESS;
 
 export async function registerProperty(property: Property) {
   const accounts = await web3.eth.getAccounts();

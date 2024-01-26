@@ -21,13 +21,16 @@ export enum PropertyType {
 export interface Property {
   title: string;
   description: string;
-  location: string;
+  country: string;
+  address: string;
   owner: string;
-  size: number;
+  surface: number;
+  bedrooms: number;
+  bathrooms: number;
   price: number;
   listedDate: Date;
   transactionStatus: TransactionStatus;
-  propertyType: PropertyType;
+  type: PropertyType;
   images?: string[];
 }
 
@@ -37,9 +40,12 @@ const PropertySchema: Schema = new Schema(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },
-    location: { type: String, required: true },
+    country: { type: String, required: true },
+    address: { type: String, required: true },
     owner: { type: String, required: true },
-    size: { type: Number, required: true },
+    surface: { type: Number, required: true },
+    bedrooms: { type: Number, required: true },
+    bathrooms: { type: Number, required: true },
     price: { type: Number, required: true },
     listedDate: { type: Date, required: true },
     transactionStatus: {
@@ -48,7 +54,7 @@ const PropertySchema: Schema = new Schema(
       default: TransactionStatus.Available,
       required: true,
     },
-    propertyType: {
+    type: {
       type: String,
       enum: Object.values(PropertyType),
       default: PropertyType.Apartment,

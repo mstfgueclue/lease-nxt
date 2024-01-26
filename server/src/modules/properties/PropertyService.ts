@@ -1,12 +1,33 @@
 import { Contract, ContractAbi, Web3 } from "web3";
 import dotenv from "dotenv";
 import { PropertyABI } from "./types";
-import { Property } from "./PropertySchema";
+import PropertyModel, { Property } from "./PropertySchema";
 
 dotenv.config();
 
 const web3 = new Web3(process.env.GANACHE_URL);
 const contractAddress = process.env.REGISTER_PROPERTY_CONTRACT_ADDRESS;
+
+// get property by id from db
+export async function getProperty(id: string): Promise<Property> {
+  const property = await PropertyModel.findById(id).exec();
+
+  if (!property) {
+    throw new Error("No property found");
+  }
+
+  return property;
+}
+
+export async function getProperties(): Promise<Property[]> {
+  const properties = PropertyModel.find().exec();
+
+  if (!properties) {
+    throw new Error("No properties found");
+  }
+
+  return properties;
+}
 
 export async function registerProperty(property: Property) {
   const accounts = await web3.eth.getAccounts();

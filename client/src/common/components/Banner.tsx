@@ -1,4 +1,4 @@
-import BannerHouse from "../../assets/img/banner-house.svg";
+import BannerHouse from "../../assets/img/banner-house.png";
 
 export const Banner = () => {
   return (
@@ -14,8 +14,12 @@ export const Banner = () => {
             with Blockchain Technology and Smart Contracts
           </p>
         </div>
-        <div className="justify-end hidden flex-1 lg:flex items-end">
-          <img src={BannerHouse} alt="BannerHouse" />
+        <div className="justify-end flex-1 lg:flex rounded-l-lg">
+          <img
+            src={BannerHouse}
+            alt="BannerHouse"
+            className="rounded-l-[75px]"
+          />
         </div>
       </div>
     </section>

@@ -78,22 +78,22 @@ export const PropertyDetails = () => {
           </div>
           <form className="flex flex-col gap-y-4">
             <input
-              className="border border-gray-300 focus:border-blue-700 rounded w-full px-4 h-14 text-sm outline-none"
+              className="border border-gray-300 focus:border-blue-700 rounded w-full px-4 h-14 text-sm outline-none bg-white"
               type="text"
               placeholder="Name*"
             />
             <input
-              className="border border-gray-300 focus:border-blue-700 rounded w-full px-4 h-14 text-sm outline-none"
+              className="border border-gray-300 focus:border-blue-700 rounded w-full px-4 h-14 text-sm outline-none bg-white"
               type="text"
               placeholder="Email*"
             />
             <input
-              className="border border-gray-300 focus:border-blue-700 rounded w-full px-4 h-14 text-sm outline-none"
+              className="border border-gray-300 focus:border-blue-700 rounded w-full px-4 h-14 text-sm outline-none bg-white"
               type="text"
               placeholder="Phone*"
             />
             <textarea
-              className="border border-gray-300 focus:border-blue-700 rounded w-full p-4 h-36 text-sm text-gray-400 outline-none resize-none"
+              className="border border-gray-300 focus:border-blue-700 rounded w-full p-4 h-36 text-sm text-gray-400 outline-none resize-none bg-white"
               placeholder="Message*"
               defaultValue="Hello, I am interested in [Modern apartment]"
             />
@@ -104,7 +104,7 @@ export const PropertyDetails = () => {
               >
                 Send message
               </button>
-              <button className="border border-blue-700 text-blue-700 hover:border-blue-600 hover:text-blue-600 rounded p-4 text-sm w-full transition">
+              <button className="border border-blue-700 text-blue-700 hover:border-blue-600 hover:text-blue-600 rounded p-4 text-sm w-full transition bg-white">
                 Call
               </button>
             </div>

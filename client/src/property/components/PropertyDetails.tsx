@@ -104,9 +104,9 @@ export const PropertyDetails = () => {
               placeholder="Phone*"
             />
             <textarea
-              className="border border-gray-300 focus:border-blue-700 rounded w-full p-4 h-36 text-sm text-gray-400 outline-none resize-none bg-white"
+              className="border border-gray-300 focus:border-blue-700 rounded w-full p-4 h-36 text-sm text-gray-500 outline-none resize-none bg-white"
               placeholder="Message*"
-              defaultValue="Hello, I am interested in [Modern apartment]"
+              defaultValue={`Hello, I am interested in ${property.title}. Please send me more information.`}
             />
             <div className="flex gap-x-2">
               <button

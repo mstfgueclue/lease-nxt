@@ -1,6 +1,7 @@
 import { BiArea, BiBath, BiBed } from "react-icons/bi";
 import { FaHome } from "react-icons/fa";
 import { ImSpinner2 } from "react-icons/im";
+import { PiUserLight } from "react-icons/pi";
 import { Link, useParams } from "react-router-dom";
 import { usePropertyQuery } from "../queries";
 import { formatPrice } from "./utils";
@@ -75,6 +76,7 @@ export const PropertyDetails = () => {
           <div className="flex items-center gap-x-4 mb-8">
             <div className="w-20 h-20 p-1 border border-gray-300 rounded-full">
               {/* <img src={property.agent.image}></img> */}
+              <PiUserLight className="w-full h-auto" />
             </div>
             <div>
               <div className="font-bold text-lg">

@@ -1,4 +1,5 @@
 import { BiArea, BiBath, BiBed } from "react-icons/bi";
+import { FaHome } from "react-icons/fa";
 import { ImSpinner2 } from "react-icons/im";
 import { Link, useParams } from "react-router-dom";
 import { usePropertyQuery } from "../queries";
@@ -44,7 +45,15 @@ export const PropertyDetails = () => {
       <div className="flex flex-col items-start gap-8 lg:flex-row">
         <div className="max-w-[768px]">
           <div className="mb-8">
-            {/* <img src={property.image} alt="" /> */}
+            {property.images ? (
+              <img
+                className="mb-8"
+                src={property.images[0]}
+                alt="propertyImage"
+              />
+            ) : (
+              <FaHome className="mb-8 h-auto w-full" />
+            )}
           </div>
           <div className="flex gap-x-6 text-blue-700 mb-6">
             <div className="flex gap-x-2 items-center">

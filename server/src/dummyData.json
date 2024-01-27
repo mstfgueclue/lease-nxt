@@ -8,7 +8,9 @@
     "bedrooms": 3,
     "bathrooms": 2,
     "price": 10000000,
-    "images": [],
+    "images": [
+      "https://lease-nxt-bucket.s3.eu-central-1.amazonaws.com/luxury-flat.jpg"
+    ],
     "owner": "owner-12345",
     "transactionStatus": "Available",
     "listedDate": "2024-01-15T00:00:00.000Z",
@@ -23,10 +25,46 @@
     "bedrooms": 2,
     "bathrooms": 1,
     "price": 1250000,
-    "images": [],
+    "images": [
+      "https://lease-nxt-bucket.s3.eu-central-1.amazonaws.com/flat3.jpg"
+    ],
     "owner": "owner-67890",
     "transactionStatus": "Pending",
     "listedDate": "2024-01-20T00:00:00.000Z",
     "type": "Apartment"
+  },
+  {
+    "title": "Spacious Apartment in Leopoldstadt",
+    "description": "A spacious 3-bedroom apartment in Vienna's Leopoldstadt district. This apartment features a fully-equipped kitchen, a large living area, and a balcony with views of the Danube Canal. Walking distance to the Prater amusement park.",
+    "country": "Austria",
+    "address": "Praterstraße 1, 1020 Wien",
+    "surface": 180,
+    "bedrooms": 3,
+    "bathrooms": 2,
+    "price": 1500000,
+    "images": [
+      "https://lease-nxt-bucket.s3.eu-central-1.amazonaws.com/flat2.jpg"
+    ],
+    "owner": "owner-12345",
+    "transactionStatus": "Available",
+    "listedDate": "2024-01-25T00:00:00.000Z",
+    "type": "Apartment"
+  },
+  {
+    "title": "Family Home in Döbling",
+    "description": "A charming 4-bedroom home in Vienna's Döbling district. This home features a spacious living area, a fully-equipped kitchen, and a large garden with a swimming pool. Walking distance to the Vienna Woods.",
+    "country": "Austria",
+    "address": "Heiligenstädter Straße 1, 1190 Wien",
+    "surface": 200,
+    "bedrooms": 4,
+    "bathrooms": 3,
+    "price": 2000000,
+    "images": [
+      "https://lease-nxt-bucket.s3.eu-central-1.amazonaws.com/house1.jpg"
+    ],
+    "owner": "owner-67890",
+    "transactionStatus": "Available",
+    "listedDate": "2024-01-30T00:00:00.000Z",
+    "type": "House"
   }
 ]

@@ -7,7 +7,7 @@ export const queryClient = new QueryClient({
         return;
       }
       if (err instanceof Error) {
-        queryClient.resetQueries();
+        queryClient.cancelQueries();
       }
     },
   }),
@@ -21,7 +21,7 @@ export const queryClient = new QueryClient({
       retry: 4,
       onError: (err) => {
         if (err instanceof Error) {
-          queryClient.resetQueries();
+          queryClient.cancelQueries();
         }
       },
     },

@@ -34,29 +34,32 @@ export const Login = () => {
       <div className="flex justify-center items-start">
         <div className="w-full max-w-[400px]">
           <div className="text-center text-3xl font-semibold mb-8">
-            Connect to MetaMask
+            🦊 MetaMask Overview
           </div>
           <div>
             {hasProvider ? (
               <div>
-                <div className="flex flex-col mb-4">
-                  {wallet.chainId && (
-                    <label className="block mb-2">
-                      Connected chain: {wallet.chainId}
-                    </label>
-                  )}
+                <div className="flex flex-col mb-4 space-y-4">
+                  <div>
+                    <label className="mb-2 font-bold">Connected chain:</label>
+                    <div className="bg-gray-100 rounded-lg px-4 py-2">
+                      {wallet.chainId}
+                    </div>
+                  </div>
 
-                  {wallet.accounts && (
-                    <label className="block mb-2">
-                      Connected account: {wallet.accounts}
-                    </label>
-                  )}
+                  <div>
+                    <label className="mb-2 font-bold">Connected account:</label>
+                    <div className="bg-gray-100 rounded-lg px-4 py-2">
+                      {wallet.accounts[0]}
+                    </div>
+                  </div>
 
-                  {wallet.balance && (
-                    <label className="block mb-2">
-                      Balance: {wallet.balance}
-                    </label>
-                  )}
+                  <div>
+                    <label className="mb-2 font-bold">Balance:</label>
+                    <div className="bg-gray-100 rounded-lg px-4 py-2">
+                      {wallet.balance} ETH
+                    </div>
+                  </div>
                 </div>
 
                 <button

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// see here: https://docs.metamask.io/wallet/tutorials/react-dapp-global-state/#2-build-the-context-provider
 import {
   PropsWithChildren,
   createContext,

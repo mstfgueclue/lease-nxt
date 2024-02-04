@@ -23,6 +23,7 @@ interface MetaMaskContextData {
   error: boolean;
   errorMessage: string;
   isConnecting: boolean;
+  isConnected: boolean;
   connectMetaMask: () => void;
   clearError: () => void;
 }
@@ -40,6 +41,7 @@ export const MetaMaskContext = createContext<MetaMaskContextData>(
 export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
   const [hasProvider, setHasProvider] = useState<boolean | null>(null);
   const [isConnecting, setIsConnecting] = useState(false);
+  const [isConnected, setIsConnected] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const clearError = () => setErrorMessage("");
@@ -54,6 +56,7 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
     if (accounts.length === 0) {
       // If there are no accounts, then the user is disconnected
       setWallet(disconnectedState);
+      setIsConnected(false);
       return;
     }
 
@@ -68,6 +71,7 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
     })) as string;
 
     setWallet({ accounts, balance, chainId });
+    setIsConnected(true);
   }, []);
 
   const updateWalletAndAccounts = useCallback(
@@ -129,6 +133,7 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
         error: !!errorMessage,
         errorMessage,
         isConnecting: isConnecting,
+        isConnected,
         connectMetaMask,
         clearError,
       }}

@@ -3,7 +3,7 @@ import Logo from "../../assets/img/LeaseNxt-Logo.png";
 import { useMetaMask } from "../../auth/useMetaMask";
 
 export const Header = () => {
-  const { hasProvider } = useMetaMask();
+  const { isConnected } = useMetaMask();
 
   return (
     <header className="py-6 px-2 mb-12 border-b">
@@ -13,7 +13,7 @@ export const Header = () => {
         </Link>
 
         <div className="flex items-center gap-6">
-          {hasProvider ? (
+          {isConnected ? (
             <Link
               className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-3 rounded-lg transition"
               to="/login"

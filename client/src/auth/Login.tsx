@@ -2,9 +2,10 @@ import {} from "@metamask/sdk-react";
 import { useMetaMask } from "./useMetaMask";
 
 export const Login = () => {
-  const { connectMetaMask, wallet, isConnecting, hasProvider } = useMetaMask();
+  const { connectMetaMask, wallet, isConnecting, isConnected, hasProvider } =
+    useMetaMask();
 
-  if (!window.ethereum) {
+  if (!hasProvider) {
     return (
       <div className="container mx-auto">
         <div className="flex justify-center h-screen items-start">
@@ -37,7 +38,7 @@ export const Login = () => {
             🦊 MetaMask Overview
           </div>
           <div>
-            {hasProvider ? (
+            {isConnected ? (
               <div>
                 <div className="flex flex-col mb-4 space-y-4">
                   <div>

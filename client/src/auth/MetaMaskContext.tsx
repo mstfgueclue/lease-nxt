@@ -132,7 +132,7 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
         hasProvider,
         error: !!errorMessage,
         errorMessage,
-        isConnecting: isConnecting,
+        isConnecting,
         isConnected,
         connectMetaMask,
         clearError,

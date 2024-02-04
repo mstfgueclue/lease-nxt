@@ -62,14 +62,9 @@ export const Login = () => {
                     </div>
                   </div>
                 </div>
-
-                <button
-                  type="submit"
-                  // onClick={disconnectMetaMask}
-                  className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
-                >
-                  Disconnect
-                </button>
+                <p className="text-xs text-gray-600">
+                  You can only disconnect your account in the MetaMask extension
+                </p>
               </div>
             ) : (
               <button

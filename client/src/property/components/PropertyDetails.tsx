@@ -6,11 +6,12 @@ import { Link, useParams } from "react-router-dom";
 import { usePropertyQuery } from "../queries";
 import { formatPrice } from "./utils";
 import { useMetaMask } from "../../auth/useMetaMask";
+import { applyToRent } from "../api";
 
 export const PropertyDetails = () => {
   const { id = "" } = useParams();
   const { data: property, isPending: isLoadingProperty } = usePropertyQuery(id);
-  const { isConnected } = useMetaMask();
+  const { isConnected, wallet } = useMetaMask();
 
   if (property === undefined) {
     return (
@@ -25,6 +26,10 @@ export const PropertyDetails = () => {
       <ImSpinner2 className="mx-auto animate-spin text-blue-700 text-4xl mt-[200px]" />
     );
   }
+
+  const handleApplyToRent = async () => {
+    await applyToRent(property._id, wallet.accounts[0]);
+  };
 
   return (
     <div className="container mx-auto mb-14 min-h-[885px]">

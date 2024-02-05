@@ -18,6 +18,9 @@
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
     "editor.rulers": [90],
-    "editor.tabSize": 2
+    "editor.tabSize": 2,
+    "[solidity]": {
+      "editor.defaultFormatter": "JuanBlanco.solidity"
+    }
   }
 }

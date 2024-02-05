@@ -6,7 +6,18 @@ import PropertyModel, { Property } from "./PropertySchema";
 dotenv.config();
 
 const web3 = new Web3(process.env.GANACHE_URL);
-const contractAddress = process.env.REGISTER_PROPERTY_CONTRACT_ADDRESS;
+const contractAddress = process.env.PROPERTY_RENTAL_CONTRACT_ADDRESS;
+const backendAddress = process.env.BACKEND_ADDRESS;
+const backendPrivateKey = process.env.BACKEND_PRIVATE_KEY;
+
+if (backendPrivateKey === undefined) {
+  throw new Error("Backend private key is missing");
+}
+
+// Configure web3 to use the backend's private key for transactions
+const account = web3.eth.accounts.privateKeyToAccount(backendPrivateKey);
+web3.eth.accounts.wallet.add(account);
+web3.eth.defaultAccount = account.address;
 
 // get property by id from db
 export async function getProperty(id: string): Promise<Property> {

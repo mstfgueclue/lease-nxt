@@ -31,7 +31,7 @@ export async function registerProperty(property: Property) {
   const options = {
     method: "POST",
     body: JSON.stringify(property),
-    HEADERS,
+    headers: HEADERS,
   };
 
   const response = await fetch(`${BASE_URL}/api/properties/register`, options);

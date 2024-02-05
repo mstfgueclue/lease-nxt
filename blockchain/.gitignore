@@ -4,3 +4,14 @@ build
 
 # MISC
 truffle-config-template.js
+
+# Ignore generated build or compiled files
+dist/
+build/
+bin/
+
+# Ignore node_modules directory
+node_modules/
+
+# Ignore environment configuration files
+.env

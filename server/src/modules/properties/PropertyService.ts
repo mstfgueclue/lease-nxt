@@ -1,4 +1,4 @@
-import { Contract, ContractAbi, Web3 } from "web3";
+import { Contract, Web3 } from "web3";
 import dotenv from "dotenv";
 import { PropertyABI } from "./types";
 import PropertyModel, { Property } from "./PropertySchema";
@@ -39,15 +39,25 @@ export async function registerProperty(property: Property) {
   console.log(receipt);
 }
 
-export async function rentProperty(
-  fromAddress: string,
-  propertyId: number,
-  rentValue: number
-) {
-  const contract = new Contract(PropertyABI.abi, contractAddress, web3);
-  const receipt = await contract.methods
-    .rentProperty(propertyId)
-    .send({ from: fromAddress, value: String(rentValue) });
+export async function applyToRent(fromAddress: string, propertyId: string) {
+  const property = await PropertyModel.findById(propertyId).exec();
+  if (!property) {
+    throw new Error("No property found");
+  }
 
-  console.log(receipt);
+  // Create the contract instance
+  const contract = new Contract(PropertyABI.abi, contractAddress, web3);
+
+  // Estimate Gas for the transaction
+  const gas = await contract.methods
+    .applyToRent(String(property._id), fromAddress)
+    .estimateGas({ from: backendAddress });
+  console.log("gas", gas.toString());
+
+  // Send the transaction to the smart contract
+  const receipt = await contract.methods
+    .applyToRent(String(property._id), fromAddress)
+    .send({ from: backendAddress, gas: gas.toString() });
+
+  console.log("receipt", receipt);
 }

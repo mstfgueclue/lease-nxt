@@ -65,10 +65,11 @@ export async function registerProperty(
   }
 }
 
-export async function rentProperty(req: Request, res: Response): Promise<void> {
+export async function applyToRent(req: Request, res: Response): Promise<void> {
   try {
-    const { from, propertyId, rentValue } = req.body;
-    await propertyService.rentProperty(from, propertyId, rentValue);
+    const { id } = req.params;
+    const { from } = req.body;
+    await propertyService.applyToRent(from, id);
 
     res.json({ message: "Property rented successfully" });
   } catch (error) {

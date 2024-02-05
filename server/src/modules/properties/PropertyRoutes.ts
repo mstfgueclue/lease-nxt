@@ -5,6 +5,6 @@ const router = Router();
 router.get("/properties/:id", propertyController.getProperty);
 router.get("/properties", propertyController.getProperties);
 router.post("/properties/register", propertyController.registerProperty);
-router.post("/properties/:id/rent", propertyController.rentProperty);
+router.post("/properties/:id/rent", propertyController.applyToRent);
 
 export default router;

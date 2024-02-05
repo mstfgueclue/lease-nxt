@@ -41,11 +41,28 @@ export async function getProperties(): Promise<Property[]> {
 }
 
 export async function registerProperty(property: Property) {
-  const accounts = await web3.eth.getAccounts();
+  const propertyDocument = await PropertyModel.create(property);
+  if (!propertyDocument) {
+    throw new Error("Failed to create property");
+  }
+
   const contract = new Contract(PropertyABI.abi, contractAddress, web3);
+
+  const gas = await contract.methods
+    .registerProperty(
+      String(propertyDocument._id),
+      propertyDocument.title,
+      propertyDocument.price
+    )
+    .estimateGas({ from: backendAddress });
+
   const receipt = await contract.methods
-    .registerProperty(property.title, property.price)
-    .send({ from: accounts[0], gas: "200000" });
+    .registerProperty(
+      String(propertyDocument._id),
+      propertyDocument.title,
+      propertyDocument.price
+    )
+    .send({ from: backendAddress, gas: gas.toString() });
 
   console.log(receipt);
 }

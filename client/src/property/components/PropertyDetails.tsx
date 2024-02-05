@@ -5,10 +5,12 @@ import { PiUserLight } from "react-icons/pi";
 import { Link, useParams } from "react-router-dom";
 import { usePropertyQuery } from "../queries";
 import { formatPrice } from "./utils";
+import { useMetaMask } from "../../auth/useMetaMask";
 
 export const PropertyDetails = () => {
   const { id = "" } = useParams();
   const { data: property, isPending: isLoadingProperty } = usePropertyQuery(id);
+  const { isConnected } = useMetaMask();
 
   if (property === undefined) {
     return (
@@ -119,6 +121,17 @@ export const PropertyDetails = () => {
                 Call
               </button>
             </div>
+
+            {isConnected && (
+              <div>
+                <button
+                  onClick={handleApplyToRent}
+                  className="border border-blue-700 text-blue-700 hover:border-blue-600 hover:text-blue-600 rounded p-4 text-sm w-full transition bg-white"
+                >
+                  Apply for Rent
+                </button>
+              </div>
+            )}
           </form>
         </div>
       </div>

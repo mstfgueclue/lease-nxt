@@ -42,3 +42,22 @@ export async function registerProperty(property: Property) {
 
   return response;
 }
+
+export async function applyToRent(id: string, from: string) {
+  const options = {
+    method: "POST",
+    body: JSON.stringify({ from }),
+    headers: HEADERS,
+  };
+
+  const response = await fetch(
+    `${BASE_URL}/api/properties/${id}/rent`,
+    options
+  );
+
+  if (!response.ok) {
+    throw new Error("Unauthorized");
+  }
+
+  return response;
+}

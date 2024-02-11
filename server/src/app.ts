@@ -1,7 +1,7 @@
 import express from "express";
 import debug from "debug";
 import { initDbWithDummyData } from "./db";
-import propertyRoutes from "./modules/properties/PropertyRoutes";
+import baseRouter from "./baseRoutes";
 import cors, { CorsOptions } from "cors";
 
 const appDebug = debug("lease-nxt:app");
@@ -21,7 +21,7 @@ const corsOptions: CorsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use("/api", propertyRoutes);
+app.use("/api", baseRouter);
 
 initDbWithDummyData();
 

@@ -2,14 +2,11 @@ import { Router } from "express";
 import * as propertyController from "./PropertyController";
 
 const router = Router();
-router.get("/properties/:id", propertyController.getProperty);
-router.get("/properties", propertyController.getProperties);
-router.post("/properties/register", propertyController.registerProperty);
-router.post("/properties/:id/rent", propertyController.applyToRent);
-router.get("/properties/:id/receipts", propertyController.getReceipts);
-router.post(
-  "/properties/:id/add-to-contract",
-  propertyController.addPropertyToContract
-);
+router.get("/:id", propertyController.getProperty);
+router.get("/", propertyController.getProperties);
+router.post("/register", propertyController.registerProperty);
+router.post("/:id/rent", propertyController.applyToRent);
+router.get("/:id/receipts", propertyController.getReceipts);
+router.post("/:id/add-to-contract", propertyController.addPropertyToContract);
 
 export default router;

@@ -2,7 +2,6 @@ import dotenv from "dotenv";
 import { Contract, Web3 } from "web3";
 import PropertyModel, { Property, PropertyDocument } from "./PropertySchema";
 import { PropertyABI } from "./types";
-import PropertyModel, { Property } from "./PropertySchema";
 
 dotenv.config();
 
@@ -19,6 +18,21 @@ if (backendPrivateKey === undefined) {
 const account = web3.eth.accounts.privateKeyToAccount(backendPrivateKey);
 web3.eth.accounts.wallet.add(account);
 web3.eth.defaultAccount = account.address;
+
+async function addReceiptToProperty(
+  propertyId: string,
+  receiptId: string
+): Promise<PropertyDocument> {
+  const propertyDocument = await PropertyModel.findByIdAndUpdate(
+    propertyId,
+    { $addToSet: { receipts: receiptId } },
+    { new: true }
+  ).exec();
+  if (!propertyDocument) {
+    throw new Error("Failed to update property");
+  }
+  return propertyDocument;
+}
 
 export async function getProperty(id: string): Promise<PropertyDocument> {
   const property = await PropertyModel.findById(id).exec();

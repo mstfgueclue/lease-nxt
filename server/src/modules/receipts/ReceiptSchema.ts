@@ -4,8 +4,11 @@ const ReceiptSchema = new Schema(
   {
     propertyId: {
       type: Schema.Types.ObjectId,
-      ref: "Property",
       required: true,
+    },
+    property: {
+      type: Schema.Types.ObjectId,
+      ref: "Property",
     },
     blockNumber: { type: String, required: true },
     transactionHash: { type: String, required: true },
@@ -18,6 +21,13 @@ const ReceiptSchema = new Schema(
     timestamps: true,
   }
 );
+
+// will come in handy when the property field needs to be populated
+ReceiptSchema.pre("save", async function () {
+  if (this.propertyId && !this.property) {
+    this.property = this.propertyId;
+  }
+});
 
 export interface Receipt {
   propertyId: string;

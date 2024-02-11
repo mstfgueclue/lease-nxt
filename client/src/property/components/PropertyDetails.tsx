@@ -1,17 +1,24 @@
+import { useState } from "react";
 import { BiArea, BiBath, BiBed } from "react-icons/bi";
 import { FaHome } from "react-icons/fa";
 import { ImSpinner2 } from "react-icons/im";
 import { PiUserLight } from "react-icons/pi";
 import { Link, useParams } from "react-router-dom";
-import { usePropertyQuery } from "../queries";
-import { formatPrice } from "./utils";
 import { useMetaMask } from "../../auth/useMetaMask";
 import { applyToRent } from "../api";
+import { usePropertyQuery, useReceiptsQuery } from "../queries";
+import { formatPrice } from "./utils";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const PropertyDetails = () => {
   const { id = "" } = useParams();
+  const queryClient = useQueryClient();
   const { data: property, isPending: isLoadingProperty } = usePropertyQuery(id);
+  const { data: receipts } = useReceiptsQuery(id);
   const { isConnected, wallet } = useMetaMask();
+  const [isApplying, setIsApplying] = useState(false);
+
+  const isApplied = receipts?.some((r) => r.from === wallet.accounts[0]);
 
   if (property === undefined) {
     return (
@@ -28,7 +35,17 @@ export const PropertyDetails = () => {
   }
 
   const handleApplyToRent = async () => {
-    await applyToRent(property._id, wallet.accounts[0]);
+    setIsApplying(true);
+    try {
+      await applyToRent(property._id, wallet.accounts[0]);
+      await queryClient.invalidateQueries({
+        queryKey: ["properties", property._id, "receipts"],
+      });
+    } catch (error) {
+      console.error("Error applying for rent:", error);
+    } finally {
+      setIsApplying(false);
+    }
   };
 
   return (
@@ -122,19 +139,31 @@ export const PropertyDetails = () => {
               >
                 Send message
               </button>
-              <button className="border border-blue-700 text-blue-700 hover:border-blue-600 hover:text-blue-600 rounded p-4 text-sm w-full transition bg-white">
+              <button className="border border-blue-700 text-blue-700 hover:bg-gray-100 hover:text-blue-600 rounded p-4 text-sm w-full transition bg-white">
                 Call
               </button>
             </div>
 
             {isConnected && (
               <div>
-                <button
-                  onClick={handleApplyToRent}
-                  className="border border-blue-700 text-blue-700 hover:border-blue-600 hover:text-blue-600 rounded p-4 text-sm w-full transition bg-white"
-                >
-                  Apply for Rent
-                </button>
+                {isApplying ? (
+                  <button
+                    disabled={true}
+                    className="flex justify-center items-center border border-blue-700 text-blue-700 rounded p-4 text-sm w-full transition bg-white opacity-50 cursor-not-allowed"
+                  >
+                    <ImSpinner2 className="animate-spin mr-2" /> Applying...
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleApplyToRent}
+                    disabled={isApplied}
+                    className={`border border-blue-700 text-blue-700 hover:border-blue-600 hover:text-blue-600 rounded p-4 text-sm w-full transition bg-white ${
+                      isApplied ? "opacity-50 cursor-not-allowed" : ""
+                    }`}
+                  >
+                    {isApplied ? "Applied" : "Apply for Rent"}
+                  </button>
+                )}
               </div>
             )}
           </form>

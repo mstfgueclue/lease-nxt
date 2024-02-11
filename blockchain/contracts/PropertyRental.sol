@@ -7,7 +7,6 @@ contract PropertyRental {
     struct Property {
         string id; 
         address payable owner;
-        string title;
         uint256 price;
         bool isRented;
     }
@@ -27,7 +26,7 @@ contract PropertyRental {
     mapping(string => uint256) private propertyIndex;
 
     // Define events for property registration and rental application
-    event PropertyRegistered(string indexed propertyId, address indexed owner, string title, uint256 price);
+    event PropertyRegistered(string indexed propertyId, address indexed owner, uint256 price);
     event RentalRequested(uint256 indexed applicationId, string indexed propertyId, address indexed applicant);
     event RentalApproved(string indexed propertyId, address indexed applicant);
     event RentalDeclined(string indexed propertyId, address indexed applicant);
@@ -46,12 +45,12 @@ contract PropertyRental {
         _;
     }
 
-    function registerProperty(string calldata _id, string calldata _title, uint256 _price) external {
+    function registerProperty(string calldata _id, address payable _owner, uint256 _price) external {
         require(propertyIndex[_id] == 0, "Property ID already exists");
-        properties.push(Property(_id, payable(msg.sender), _title, _price, false));
+        properties.push(Property(_id, _owner, _price, false));
         // Use the length of the properties array as an index reference
         propertyIndex[_id] = properties.length - 1;
-        emit PropertyRegistered(_id, msg.sender, _title, _price);
+        emit PropertyRegistered(_id, _owner, _price);
     }
 
     function applyToRent(string calldata _propertyId, address _applicant) external onlyBackend {

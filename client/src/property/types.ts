@@ -36,9 +36,14 @@ export interface Property {
 }
 
 export type Receipt = {
+  _id: string;
   propertyId: string;
   transactionHash: string;
   from: string;
   to: string;
   gasUsed: number;
+};
+
+export type PopulatedReceipt = Receipt & {
+  property: Property;
 };

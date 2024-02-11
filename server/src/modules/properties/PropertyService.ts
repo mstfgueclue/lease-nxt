@@ -1,5 +1,11 @@
 import dotenv from "dotenv";
 import { Contract, Web3 } from "web3";
+import {
+  createReceipt,
+  estimateGas,
+  hasAlreadyApplied,
+  sendTransaction,
+} from "../receipts/ReceiptService";
 import PropertyModel, { Property, PropertyDocument } from "./PropertySchema";
 import { PropertyABI } from "./types";
 
@@ -101,5 +107,33 @@ export async function applyToRent(fromAddress: string, propertyId: string) {
     .applyToRent(String(property._id), fromAddress)
     .send({ from: backendAddress, gas: gas.toString() });
 
-  console.log("receipt", receipt);
+export async function applyToRent(
+  fromAddress: string,
+  propertyId: string
+): Promise<PropertyDocument> {
+  const alreadyApplied = await hasAlreadyApplied(propertyId, fromAddress);
+  if (alreadyApplied) {
+    throw new Error(
+      "An application has already been submitted for this property"
+    );
+  }
+
+  const property = await getProperty(propertyId);
+  const contract = new Contract(PropertyABI.abi, contractAddress, web3);
+  const gas = await estimateGas(contract, String(property._id), fromAddress);
+  const receipt = await sendTransaction(
+    contract,
+    String(property._id),
+    fromAddress,
+    Number(gas.toString())
+  );
+
+  const receiptDocument = await createReceipt(propertyId, fromAddress, receipt);
+  const propertyDocument = await addReceiptToProperty(
+    propertyId,
+    String(receiptDocument._id)
+  );
+
+  console.log("receipt", receiptDocument);
+  return propertyDocument;
 }

@@ -40,7 +40,7 @@ export async function registerProperty(property: Property) {
     throw new Error("Unauthorized");
   }
 
-  return response;
+  return response.json();
 }
 
 export async function applyToRent(id: string, from: string) {
@@ -56,8 +56,8 @@ export async function applyToRent(id: string, from: string) {
   );
 
   if (!response.ok) {
-    throw new Error("Unauthorized");
+    throw new Error("There was an error applying to rent the property");
   }
 
-  return response;
+  return response.json();
 }

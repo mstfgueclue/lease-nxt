@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import { Contract, Web3 } from "web3";
+import { ReceiptDocument } from "../receipts/ReceiptSchema";
 import {
   createReceipt,
   estimateGas,
@@ -79,6 +80,7 @@ export async function registerProperty(property: Property) {
   const receipt = await contract.methods
     .registerProperty(
       String(propertyDocument._id),
+      propertyDocument.owner,
       propertyDocument.title,
       propertyDocument.price
     )
@@ -87,25 +89,29 @@ export async function registerProperty(property: Property) {
   console.log(receipt);
 }
 
-export async function applyToRent(fromAddress: string, propertyId: string) {
-  const property = await PropertyModel.findById(propertyId).exec();
+export async function addPropertyToContract(
+  propertyId: string,
+  owner: string,
+  price: number
+): Promise<ReceiptDocument> {
+  const property = await getProperty(propertyId);
   if (!property) {
-    throw new Error("No property found");
+    throw new Error("Property not found");
   }
 
-  // Create the contract instance
   const contract = new Contract(PropertyABI.abi, contractAddress, web3);
-
-  // Estimate Gas for the transaction
   const gas = await contract.methods
-    .applyToRent(String(property._id), fromAddress)
+    .registerProperty(propertyId, owner, price)
     .estimateGas({ from: backendAddress });
-  console.log("gas", gas.toString());
 
-  // Send the transaction to the smart contract
   const receipt = await contract.methods
-    .applyToRent(String(property._id), fromAddress)
+    .registerProperty(propertyId, owner, price)
     .send({ from: backendAddress, gas: gas.toString() });
+
+  const receiptDocument = await createReceipt(propertyId, owner, receipt);
+
+  return receiptDocument;
+}
 
 export async function applyToRent(
   fromAddress: string,

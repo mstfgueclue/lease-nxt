@@ -69,9 +69,9 @@ export async function applyToRent(req: Request, res: Response): Promise<void> {
   try {
     const { id } = req.params;
     const { from } = req.body;
-    await propertyService.applyToRent(from, id);
+    const property = await propertyService.applyToRent(from, id);
 
-    res.json({ message: "Property rented successfully" });
+    res.send(property);
   } catch (error) {
     res.status(500).send(error);
   }

@@ -41,6 +41,9 @@ export const PropertyDetails = () => {
       await queryClient.invalidateQueries({
         queryKey: ["properties", property._id, "receipts"],
       });
+      await queryClient.invalidateQueries({
+        queryKey: ["wallets", wallet.accounts[0]],
+      });
     } catch (error) {
       console.error("Error applying for rent:", error);
     } finally {

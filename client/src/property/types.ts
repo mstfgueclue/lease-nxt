@@ -34,3 +34,11 @@ export interface Property {
   transactionStatus: TransactionStatus;
   images?: string[];
 }
+
+export type Receipt = {
+  propertyId: string;
+  transactionHash: string;
+  from: string;
+  to: string;
+  gasUsed: number;
+};

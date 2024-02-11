@@ -26,21 +26,6 @@ const account = web3.eth.accounts.privateKeyToAccount(backendPrivateKey);
 web3.eth.accounts.wallet.add(account);
 web3.eth.defaultAccount = account.address;
 
-async function addReceiptToProperty(
-  propertyId: string,
-  receiptId: string
-): Promise<PropertyDocument> {
-  const propertyDocument = await PropertyModel.findByIdAndUpdate(
-    propertyId,
-    { $addToSet: { receipts: receiptId } },
-    { new: true }
-  ).exec();
-  if (!propertyDocument) {
-    throw new Error("Failed to update property");
-  }
-  return propertyDocument;
-}
-
 export async function getProperty(id: string): Promise<PropertyDocument> {
   const property = await PropertyModel.findById(id).exec();
 
@@ -135,11 +120,7 @@ export async function applyToRent(
   );
 
   const receiptDocument = await createReceipt(propertyId, fromAddress, receipt);
-  const propertyDocument = await addReceiptToProperty(
-    propertyId,
-    String(receiptDocument._id)
-  );
-
   console.log("receipt", receiptDocument);
-  return propertyDocument;
+
+  return property;
 }

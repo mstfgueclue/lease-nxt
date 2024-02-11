@@ -1,4 +1,4 @@
-import { Property } from "./types";
+import { Property, Receipt } from "./types";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -57,6 +57,16 @@ export async function applyToRent(id: string, from: string) {
 
   if (!response.ok) {
     throw new Error("There was an error applying to rent the property");
+  }
+
+  return response.json();
+}
+
+export async function getReceiptsForProperty(id: string): Promise<Receipt[]> {
+  const response = await fetch(`${BASE_URL}/api/properties/${id}/receipts`);
+
+  if (!response.ok) {
+    throw new Error("There was an error fetching the receipts");
   }
 
   return response.json();

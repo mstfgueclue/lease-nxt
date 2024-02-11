@@ -6,5 +6,6 @@ router.get("/properties/:id", propertyController.getProperty);
 router.get("/properties", propertyController.getProperties);
 router.post("/properties/register", propertyController.registerProperty);
 router.post("/properties/:id/rent", propertyController.applyToRent);
+router.get("/properties/:id/receipts", propertyController.getReceipts);
 
 export default router;

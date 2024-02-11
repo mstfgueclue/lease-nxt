@@ -65,6 +65,17 @@ export async function registerProperty(
   }
 }
 
+export async function getReceipts(req: Request, res: Response): Promise<void> {
+  try {
+    const { id } = req.params;
+    const receipts = await receiptService.getReceipts(id);
+
+    res.send(receipts);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}
+
 export async function applyToRent(req: Request, res: Response): Promise<void> {
   try {
     const { id } = req.params;

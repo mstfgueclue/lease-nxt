@@ -1,5 +1,6 @@
 import {} from "@metamask/sdk-react";
 import { useMetaMask } from "./useMetaMask";
+import { WalletProperties } from "../user/components/Profile";
 
 export const Login = () => {
   const { connectMetaMask, wallet, isConnecting, isConnected, hasProvider } =
@@ -31,7 +32,7 @@ export const Login = () => {
   }
 
   return (
-    <div className="container mx-auto mb-14 h-screen max-h-[885px] ">
+    <div className="container mx-auto mb-14">
       <div className="flex justify-center items-start">
         <div className="w-full max-w-[400px]">
           <div className="text-center text-3xl font-semibold mb-8">
@@ -78,6 +79,13 @@ export const Login = () => {
             )}
           </div>
         </div>
+      </div>
+      <div className="mt-10">
+        <hr className="mb-8" />
+        <h2 className="text-3xl font-semibold text-center mb-8">
+          Applied Properties
+        </h2>
+        <WalletProperties walletAddress={wallet.accounts[0]} />
       </div>
     </div>
   );

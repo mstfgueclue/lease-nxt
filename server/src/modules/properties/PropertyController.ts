@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import * as propertyService from "./PropertyService";
+import * as receiptService from "../receipts/ReceiptService";
 import { Property, PropertyType, TransactionStatus } from "./PropertySchema";
+import * as propertyService from "./PropertyService";
 
 export async function getProperty(req: Request, res: Response): Promise<void> {
   try {
@@ -71,6 +72,25 @@ export async function getReceipts(req: Request, res: Response): Promise<void> {
     const receipts = await receiptService.getReceipts(id);
 
     res.send(receipts);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}
+
+export async function addPropertyToContract(
+  req: Request,
+  res: Response
+): Promise<void> {
+  try {
+    const { id } = req.params;
+    const { owner, price } = req.body;
+    const receipt = await propertyService.addPropertyToContract(
+      id,
+      owner,
+      price
+    );
+
+    res.send(receipt);
   } catch (error) {
     res.status(500).send(error);
   }

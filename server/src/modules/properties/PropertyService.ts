@@ -1,5 +1,6 @@
-import { Contract, Web3 } from "web3";
 import dotenv from "dotenv";
+import { Contract, Web3 } from "web3";
+import PropertyModel, { Property, PropertyDocument } from "./PropertySchema";
 import { PropertyABI } from "./types";
 import PropertyModel, { Property } from "./PropertySchema";
 
@@ -19,8 +20,7 @@ const account = web3.eth.accounts.privateKeyToAccount(backendPrivateKey);
 web3.eth.accounts.wallet.add(account);
 web3.eth.defaultAccount = account.address;
 
-// get property by id from db
-export async function getProperty(id: string): Promise<Property> {
+export async function getProperty(id: string): Promise<PropertyDocument> {
   const property = await PropertyModel.findById(id).exec();
 
   if (!property) {
@@ -30,7 +30,7 @@ export async function getProperty(id: string): Promise<Property> {
   return property;
 }
 
-export async function getProperties(): Promise<Property[]> {
+export async function getProperties(): Promise<PropertyDocument[]> {
   const properties = PropertyModel.find().exec();
 
   if (!properties) {

@@ -56,25 +56,6 @@ export const PropertyABI = {
       anonymous: false,
       inputs: [
         {
-          indexed: false,
-          internalType: "string",
-          name: "propertyId",
-          type: "string",
-        },
-        {
-          indexed: false,
-          internalType: "address",
-          name: "applicant",
-          type: "address",
-        },
-      ],
-      name: "LogApplyToRentSuccess",
-      type: "event",
-    },
-    {
-      anonymous: false,
-      inputs: [
-        {
           indexed: true,
           internalType: "string",
           name: "propertyId",
@@ -85,12 +66,6 @@ export const PropertyABI = {
           internalType: "address",
           name: "owner",
           type: "address",
-        },
-        {
-          indexed: false,
-          internalType: "string",
-          name: "title",
-          type: "string",
         },
         {
           indexed: false,
@@ -166,6 +141,42 @@ export const PropertyABI = {
       type: "event",
     },
     {
+      inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+      name: "properties",
+      outputs: [
+        { internalType: "string", name: "id", type: "string" },
+        { internalType: "address payable", name: "owner", type: "address" },
+        { internalType: "uint256", name: "price", type: "uint256" },
+        { internalType: "bool", name: "isRented", type: "bool" },
+      ],
+      stateMutability: "view",
+      type: "function",
+      constant: true,
+    },
+    {
+      inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+      name: "rentalApplications",
+      outputs: [
+        { internalType: "string", name: "propertyId", type: "string" },
+        { internalType: "address", name: "applicant", type: "address" },
+        { internalType: "bool", name: "isApproved", type: "bool" },
+      ],
+      stateMutability: "view",
+      type: "function",
+      constant: true,
+    },
+    {
+      inputs: [
+        { internalType: "string", name: "_id", type: "string" },
+        { internalType: "address payable", name: "_owner", type: "address" },
+        { internalType: "uint256", name: "_price", type: "uint256" },
+      ],
+      name: "registerProperty",
+      outputs: [],
+      stateMutability: "nonpayable",
+      type: "function",
+    },
+    {
       inputs: [
         { internalType: "string", name: "_propertyId", type: "string" },
         { internalType: "address", name: "_applicant", type: "address" },
@@ -191,41 +202,6 @@ export const PropertyABI = {
       name: "declineRental",
       outputs: [],
       stateMutability: "nonpayable",
-      type: "function",
-    },
-    {
-      inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-      name: "properties",
-      outputs: [
-        { internalType: "string", name: "id", type: "string" },
-        { internalType: "address payable", name: "owner", type: "address" },
-        { internalType: "string", name: "title", type: "string" },
-        { internalType: "uint256", name: "price", type: "uint256" },
-        { internalType: "bool", name: "isRented", type: "bool" },
-      ],
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      inputs: [
-        { internalType: "string", name: "_id", type: "string" },
-        { internalType: "string", name: "_title", type: "string" },
-        { internalType: "uint256", name: "_price", type: "uint256" },
-      ],
-      name: "registerProperty",
-      outputs: [],
-      stateMutability: "nonpayable",
-      type: "function",
-    },
-    {
-      inputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-      name: "rentalApplications",
-      outputs: [
-        { internalType: "string", name: "propertyId", type: "string" },
-        { internalType: "address", name: "applicant", type: "address" },
-        { internalType: "bool", name: "isApproved", type: "bool" },
-      ],
-      stateMutability: "view",
       type: "function",
     },
   ],

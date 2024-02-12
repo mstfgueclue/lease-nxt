@@ -40,7 +40,6 @@ export type Receipt = {
   propertyId: string;
   transactionHash: string;
   from: string;
-  to: string;
   gasUsed: number;
 };
 

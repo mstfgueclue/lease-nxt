@@ -1,7 +1,7 @@
 import { ImSpinner2 } from "react-icons/im";
 import { Link } from "react-router-dom";
-import { PropertyCard } from "../../property/components/PropertyCard";
 import { useWalletReceiptsQuery } from "../queries";
+import { WalletPropertyCard } from "./WalletPropertyCard";
 
 type Properties = {
   walletAddress: string;
@@ -32,7 +32,10 @@ export const WalletProperties = ({ walletAddress }: Properties) => {
           {receipts.map((receipt, index) => {
             return (
               <Link to={`/property/${receipt.propertyId}`} key={index}>
-                <PropertyCard property={receipt.property} />
+                <WalletPropertyCard
+                  property={receipt.property}
+                  receipt={receipt}
+                />
               </Link>
             );
           })}

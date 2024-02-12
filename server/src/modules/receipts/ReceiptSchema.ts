@@ -10,6 +10,10 @@ const ReceiptSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Property",
     },
+    applicationId: {
+      type: String,
+      required: true,
+    },
     blockNumber: { type: String, required: true },
     transactionHash: { type: String, required: true },
     from: { type: String, required: true },
@@ -31,6 +35,7 @@ ReceiptSchema.pre("save", async function () {
 
 export interface Receipt {
   propertyId: string;
+  applicationId: string;
   blockNumber: string;
   transactionHash: string;
   from: string;

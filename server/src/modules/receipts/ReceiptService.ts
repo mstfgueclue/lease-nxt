@@ -16,6 +16,9 @@ export async function createReceipt(
 ) {
   const mappedReceipt: Receipt = {
     propertyId,
+    applicationId: String(
+      receipt.events?.RentalRequested.returnValues.applicationId
+    ),
     blockNumber: String(receipt.blockNumber),
     transactionHash: String(receipt.transactionHash),
     from: from,

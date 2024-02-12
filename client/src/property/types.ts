@@ -38,6 +38,7 @@ export interface Property {
 export type Receipt = {
   _id: string;
   propertyId: string;
+  applicationId: string;
   transactionHash: string;
   from: string;
   gasUsed: number;

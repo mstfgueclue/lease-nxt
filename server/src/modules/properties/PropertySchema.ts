@@ -1,10 +1,8 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-export enum TransactionStatus {
+export enum Status {
   Available = "Available",
-  UnderContract = "Under Contract",
-  Sold = "Sold",
-  Pending = "Pending",
+  Rented = "Rented",
   Cancelled = "Cancelled",
 }
 
@@ -29,7 +27,7 @@ export interface Property {
   bathrooms: number;
   price: number;
   listedDate: Date;
-  transactionStatus: TransactionStatus;
+  status: Status;
   type: PropertyType;
   images?: string[];
 }
@@ -48,10 +46,10 @@ const PropertySchema: Schema = new Schema(
     bathrooms: { type: Number, required: true },
     price: { type: Number, required: true },
     listedDate: { type: Date, required: true },
-    transactionStatus: {
+    status: {
       type: String,
-      enum: Object.values(TransactionStatus),
-      default: TransactionStatus.Available,
+      enum: Object.values(Status),
+      default: Status.Available,
       required: true,
     },
     type: {

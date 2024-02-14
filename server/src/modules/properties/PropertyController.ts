@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import * as receiptService from "../receipts/ReceiptService";
-import { Property, PropertyType, TransactionStatus } from "./PropertySchema";
+import { Property, PropertyType, Status } from "./PropertySchema";
 import * as propertyService from "./PropertyService";
 
 export async function getProperty(req: Request, res: Response): Promise<void> {
@@ -55,7 +55,7 @@ export async function registerProperty(
       bathrooms,
       price,
       listedDate: new Date(),
-      transactionStatus: TransactionStatus.Available,
+      status: Status.Available,
       type: PropertyType.Apartment,
     };
     await propertyService.registerProperty(property);

@@ -12,7 +12,7 @@
       "https://lease-nxt-bucket.s3.eu-central-1.amazonaws.com/luxury-flat.jpg"
     ],
     "owner": "owner-12345",
-    "transactionStatus": "Available",
+    "status": "Available",
     "listedDate": "2024-01-15T00:00:00.000Z",
     "type": "Apartment"
   },
@@ -29,7 +29,7 @@
       "https://lease-nxt-bucket.s3.eu-central-1.amazonaws.com/flat3.jpg"
     ],
     "owner": "owner-67890",
-    "transactionStatus": "Pending",
+    "status": "Available",
     "listedDate": "2024-01-20T00:00:00.000Z",
     "type": "Apartment"
   },
@@ -46,7 +46,7 @@
       "https://lease-nxt-bucket.s3.eu-central-1.amazonaws.com/flat2.jpg"
     ],
     "owner": "owner-12345",
-    "transactionStatus": "Available",
+    "status": "Available",
     "listedDate": "2024-01-25T00:00:00.000Z",
     "type": "Apartment"
   },
@@ -63,7 +63,7 @@
       "https://lease-nxt-bucket.s3.eu-central-1.amazonaws.com/house1.jpg"
     ],
     "owner": "owner-67890",
-    "transactionStatus": "Available",
+    "status": "Available",
     "listedDate": "2024-01-30T00:00:00.000Z",
     "type": "House"
   }

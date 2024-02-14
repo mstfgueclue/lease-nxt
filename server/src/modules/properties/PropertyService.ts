@@ -8,7 +8,11 @@ import {
   mapReceipt,
   sendTransaction,
 } from "../receipts/ReceiptService";
-import PropertyModel, { Property, PropertyDocument } from "./PropertySchema";
+import PropertyModel, {
+  Property,
+  PropertyDocument,
+  Status,
+} from "./PropertySchema";
 import { PropertyABI } from "./types";
 import { TransactionType } from "../receipts/types";
 
@@ -165,5 +169,10 @@ export async function approveApplication(
     TransactionType.APPROVE_RENTAL
   );
   const receiptDocument = await createReceipt(mappedReceipt);
+
+  await PropertyModel.findOneAndUpdate(
+    { _id: transaction.propertyId },
+    { status: Status.Rented }
+  );
   console.log("receipt", receiptDocument);
 }

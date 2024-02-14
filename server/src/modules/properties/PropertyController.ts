@@ -107,3 +107,18 @@ export async function applyToRent(req: Request, res: Response): Promise<void> {
     res.status(500).send(error);
   }
 }
+
+export async function approveApplication(
+  req: Request,
+  res: Response
+): Promise<void> {
+  try {
+    const { id } = req.params;
+    const { from } = req.body;
+    const property = await propertyService.approveApplication(id, from);
+
+    res.send(property);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+}

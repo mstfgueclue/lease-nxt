@@ -1,14 +1,16 @@
 import dotenv from "dotenv";
 import { Contract, Web3 } from "web3";
-import { ReceiptDocument } from "../receipts/ReceiptSchema";
+import ReceiptModel, { ReceiptDocument } from "../receipts/ReceiptSchema";
 import {
   createReceipt,
   estimateGas,
   hasAlreadyApplied,
+  mapReceipt,
   sendTransaction,
 } from "../receipts/ReceiptService";
 import PropertyModel, { Property, PropertyDocument } from "./PropertySchema";
 import { PropertyABI } from "./types";
+import { TransactionType } from "../receipts/types";
 
 dotenv.config();
 
@@ -123,4 +125,33 @@ export async function applyToRent(
   console.log("receipt", receiptDocument);
 
   return property;
+}
+
+export async function approveApplication(
+  applicationId: string,
+  fromAddress: string
+): Promise<void> {
+  const transaction = await ReceiptModel.findOne({
+    applicationId,
+  });
+  if (!transaction) {
+    throw new Error("No application found");
+  }
+  const contract = new Contract(PropertyABI.abi, contractAddress, web3);
+  const gas = await contract.methods
+    .approveRental(applicationId)
+    .estimateGas({ from: fromAddress });
+
+  const receipt = await contract.methods
+    .approveRental(applicationId)
+    .send({ from: fromAddress, gas: gas.toString() });
+
+  const mappedReceipt = mapReceipt(
+    transaction.propertyId,
+    fromAddress,
+    receipt,
+    TransactionType.APPROVE_RENTAL
+  );
+  const receiptDocument = await createReceipt(mappedReceipt);
+  console.log("receipt", receiptDocument);
 }

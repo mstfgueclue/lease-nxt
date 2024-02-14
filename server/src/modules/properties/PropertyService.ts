@@ -95,7 +95,13 @@ export async function addPropertyToContract(
     .registerProperty(propertyId, owner, price)
     .send({ from: backendAddress, gas: gas.toString() });
 
-  const receiptDocument = await createReceipt(propertyId, owner, receipt);
+  const mappedReceipt = mapReceipt(
+    propertyId,
+    owner,
+    receipt,
+    TransactionType.REGISTER_RENTAL
+  );
+  const receiptDocument = await createReceipt(mappedReceipt);
 
   return receiptDocument;
 }
@@ -121,7 +127,13 @@ export async function applyToRent(
     Number(gas.toString())
   );
 
-  const receiptDocument = await createReceipt(propertyId, fromAddress, receipt);
+  const mappedReceipt = mapReceipt(
+    propertyId,
+    fromAddress,
+    receipt,
+    TransactionType.REQUEST_RENTAL
+  );
+  const receiptDocument = await createReceipt(mappedReceipt);
   console.log("receipt", receiptDocument);
 
   return property;

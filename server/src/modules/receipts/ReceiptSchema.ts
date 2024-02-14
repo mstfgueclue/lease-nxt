@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import { TransactionType } from "./types";
 
 const ReceiptSchema = new Schema(
   {
@@ -12,7 +13,6 @@ const ReceiptSchema = new Schema(
     },
     applicationId: {
       type: String,
-      required: true,
     },
     blockNumber: { type: String, required: true },
     transactionHash: { type: String, required: true },
@@ -20,6 +20,11 @@ const ReceiptSchema = new Schema(
     backendAddress: { type: String, required: true },
     smartContractAddress: { type: String, required: true },
     gasUsed: { type: Number, required: true },
+    transactionType: {
+      type: String,
+      enum: Object.values(TransactionType),
+      required: true,
+    },
   },
   {
     timestamps: true,
@@ -35,9 +40,10 @@ ReceiptSchema.pre("save", async function () {
 
 export interface Receipt {
   propertyId: string;
-  applicationId: string;
+  applicationId?: string;
   blockNumber: string;
   transactionHash: string;
+  transactionType: TransactionType;
   from: string;
   backendAddress: string;
   smartContractAddress: string;

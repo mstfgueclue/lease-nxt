@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import { Contract, ContractAbi, TransactionReceipt } from "web3";
 import ReceiptModel, { Receipt } from "./ReceiptSchema";
+import { TransactionType } from "./types";
 
 dotenv.config();
 const backendAddress = process.env.BACKEND_ADDRESS;
@@ -9,24 +10,34 @@ export async function getReceipts(propertyId: string) {
   return ReceiptModel.find({ propertyId }).exec();
 }
 
-export async function createReceipt(
+export function mapReceipt(
   propertyId: string,
   from: string,
-  receipt: TransactionReceipt
-) {
+  receipt: TransactionReceipt,
+  transactionType: TransactionType
+): Receipt {
   const mappedReceipt: Receipt = {
     propertyId,
-    applicationId: String(
-      receipt.events?.RentalRequested.returnValues.applicationId
-    ),
     blockNumber: String(receipt.blockNumber),
     transactionHash: String(receipt.transactionHash),
     from: from,
     backendAddress: String(receipt.from),
     smartContractAddress: String(receipt.to),
     gasUsed: Number(receipt.gasUsed.toString()),
+    transactionType: transactionType,
   };
-  const receiptDocument = await ReceiptModel.create(mappedReceipt);
+
+  if (transactionType === TransactionType.REQUEST_RENTAL) {
+    mappedReceipt.applicationId = String(
+      receipt.events?.RentalRequested.returnValues.applicationId
+    );
+  }
+
+  return mappedReceipt;
+}
+
+export async function createReceipt(receipt: Receipt) {
+  const receiptDocument = await ReceiptModel.create(receipt);
   if (!receiptDocument) {
     throw new Error("Failed to create receipt");
   }

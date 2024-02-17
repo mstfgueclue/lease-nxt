@@ -34,7 +34,7 @@ export const Login = () => {
   return (
     <div className="container mx-auto mb-14">
       <div className="flex justify-center items-start">
-        <div className="w-full max-w-[400px]">
+        <div className="w-full max-w-[400px] min-h-[550px]">
           <div className="text-center text-3xl font-semibold mb-8">
             🦊 MetaMask Overview
           </div>
@@ -72,7 +72,7 @@ export const Login = () => {
                 type="submit"
                 disabled={isConnecting}
                 onClick={connectMetaMask}
-                className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+                className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition mt-10"
               >
                 Connect
               </button>

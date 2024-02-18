@@ -1,8 +1,6 @@
-export enum TransactionStatus {
+export enum Status {
   Available = "Available",
-  UnderContract = "Under Contract",
-  Sold = "Sold",
-  Pending = "Pending",
+  Rented = "Rented",
   Cancelled = "Cancelled",
 }
 
@@ -38,7 +36,7 @@ export interface Property {
   type: PropertyType;
 
   listedDate: Date;
-  transactionStatus: TransactionStatus;
+  status: Status;
   images?: string[];
 }
 

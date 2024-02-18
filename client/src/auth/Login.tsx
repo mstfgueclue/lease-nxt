@@ -83,7 +83,7 @@ export const Login = () => {
       <div className="mt-10">
         <hr className="mb-8" />
         <h2 className="text-3xl font-semibold text-center mb-8">
-          Applied Properties
+          My Properties
         </h2>
         <WalletProperties walletAddress={wallet.accounts[0]} />
       </div>

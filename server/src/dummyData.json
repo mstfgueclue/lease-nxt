@@ -7,11 +7,11 @@
     "surface": 150,
     "bedrooms": 3,
     "bathrooms": 2,
-    "price": 10000000,
+    "price": 7500,
     "images": [
       "https://lease-nxt-bucket.s3.eu-central-1.amazonaws.com/luxury-flat.jpg"
     ],
-    "owner": "owner-12345",
+    "owner": "0x66910c9D58f1dc3324b271Bc844c87e527640B63",
     "status": "Available",
     "listedDate": "2024-01-15T00:00:00.000Z",
     "type": "Apartment"
@@ -24,11 +24,11 @@
     "surface": 120,
     "bedrooms": 2,
     "bathrooms": 1,
-    "price": 1250000,
+    "price": 5500,
     "images": [
       "https://lease-nxt-bucket.s3.eu-central-1.amazonaws.com/flat3.jpg"
     ],
-    "owner": "owner-67890",
+    "owner": "0x66910c9D58f1dc3324b271Bc844c87e527640B63",
     "status": "Available",
     "listedDate": "2024-01-20T00:00:00.000Z",
     "type": "Apartment"
@@ -41,11 +41,11 @@
     "surface": 180,
     "bedrooms": 3,
     "bathrooms": 2,
-    "price": 1500000,
+    "price": 4700,
     "images": [
       "https://lease-nxt-bucket.s3.eu-central-1.amazonaws.com/flat2.jpg"
     ],
-    "owner": "owner-12345",
+    "owner": "0x66910c9D58f1dc3324b271Bc844c87e527640B63",
     "status": "Available",
     "listedDate": "2024-01-25T00:00:00.000Z",
     "type": "Apartment"
@@ -58,11 +58,11 @@
     "surface": 200,
     "bedrooms": 4,
     "bathrooms": 3,
-    "price": 2000000,
+    "price": 5000,
     "images": [
       "https://lease-nxt-bucket.s3.eu-central-1.amazonaws.com/house1.jpg"
     ],
-    "owner": "owner-67890",
+    "owner": "0x66910c9D58f1dc3324b271Bc844c87e527640B63",
     "status": "Available",
     "listedDate": "2024-01-30T00:00:00.000Z",
     "type": "House"

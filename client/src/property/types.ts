@@ -16,6 +16,13 @@ export enum PropertyType {
   Other = "Other",
 }
 
+export enum TransactionType {
+  REGISTER_RENTAL = "REGISTER_RENTAL",
+  REQUEST_RENTAL = "REQUEST_RENTAL",
+  APPROVE_RENTAL = "APPROVE_RENTAL",
+  DECLINE_RENTAL = "DECLINE_RENTAL",
+}
+
 export interface Property {
   _id: string;
   title: string;
@@ -42,6 +49,7 @@ export type Receipt = {
   transactionHash: string;
   from: string;
   gasUsed: number;
+  transactionType: TransactionType;
 };
 
 export type PopulatedReceipt = Receipt & {

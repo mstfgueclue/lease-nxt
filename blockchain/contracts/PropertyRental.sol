@@ -9,6 +9,7 @@ contract PropertyRental {
         address payable owner;
         uint256 price;
         bool isRented;
+        uint256 lastPaymentTimestamp;
     }
 
     struct RentalApplication {
@@ -30,7 +31,8 @@ contract PropertyRental {
     event RentalRequested(uint256 indexed applicationId, string indexed propertyId, address indexed applicant);
     event RentalApproved(string indexed propertyId, address indexed applicant);
     event RentalDeclined(string indexed propertyId, address indexed applicant);
-
+    event RentPaid(string indexed propertyId, address indexed tenant, uint256 amount, uint256 timestamp);
+    
     // Define events for verbose logging
     event LogApplyToRentAttempt(string propertyId, address applicant);
     event LogApplyToRentFailure(string propertyId, address applicant, string reason);
@@ -47,7 +49,7 @@ contract PropertyRental {
 
     function registerProperty(string calldata _id, address payable _owner, uint256 _price) external {
         require(propertyIndex[_id] == 0, "Property ID already exists");
-        properties.push(Property(_id, _owner, _price, false));
+        properties.push(Property(_id, _owner, _price, false, 0));
         // Use the length of the properties array as an index reference
         propertyIndex[_id] = properties.length - 1;
         emit PropertyRegistered(_id, _owner, _price);
@@ -104,5 +106,16 @@ contract PropertyRental {
         emit RentalDeclined(application.propertyId, application.applicant);
     }
 
-    // Additional helper functions might be needed for managing string IDs effectively.
+    function payRent(string memory _propertyId) public payable {
+        uint256 index = propertyIndex[_propertyId];
+        require(index != 0 || keccak256(abi.encodePacked(properties[0].id)) == keccak256(abi.encodePacked(_propertyId)), "Property not found");
+
+        Property storage property = properties[index];
+        require(block.timestamp >= property.lastPaymentTimestamp + 30 days, "Rent already paid for this month");
+
+        property.owner.transfer(msg.value);
+        property.lastPaymentTimestamp = block.timestamp;
+
+        emit RentPaid(_propertyId, msg.sender, msg.value, block.timestamp);
+    }
 }

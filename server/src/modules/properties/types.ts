@@ -89,6 +89,37 @@ export const PropertyABI = {
         {
           indexed: true,
           internalType: "address",
+          name: "tenant",
+          type: "address",
+        },
+        {
+          indexed: false,
+          internalType: "uint256",
+          name: "amount",
+          type: "uint256",
+        },
+        {
+          indexed: false,
+          internalType: "uint256",
+          name: "timestamp",
+          type: "uint256",
+        },
+      ],
+      name: "RentPaid",
+      type: "event",
+    },
+    {
+      anonymous: false,
+      inputs: [
+        {
+          indexed: true,
+          internalType: "string",
+          name: "propertyId",
+          type: "string",
+        },
+        {
+          indexed: true,
+          internalType: "address",
           name: "applicant",
           type: "address",
         },
@@ -148,6 +179,11 @@ export const PropertyABI = {
         { internalType: "address payable", name: "owner", type: "address" },
         { internalType: "uint256", name: "price", type: "uint256" },
         { internalType: "bool", name: "isRented", type: "bool" },
+        {
+          internalType: "uint256",
+          name: "lastPaymentTimestamp",
+          type: "uint256",
+        },
       ],
       stateMutability: "view",
       type: "function",
@@ -203,6 +239,14 @@ export const PropertyABI = {
       outputs: [],
       stateMutability: "nonpayable",
       type: "function",
+    },
+    {
+      inputs: [{ internalType: "string", name: "_propertyId", type: "string" }],
+      name: "payRent",
+      outputs: [],
+      stateMutability: "payable",
+      type: "function",
+      payable: true,
     },
   ],
 } as const;

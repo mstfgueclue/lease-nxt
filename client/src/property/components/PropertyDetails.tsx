@@ -9,6 +9,7 @@ import { applyToRent } from "../api";
 import { usePropertyQuery, useReceiptsQuery } from "../queries";
 import { formatPrice } from "./utils";
 import { useQueryClient } from "@tanstack/react-query";
+import { Status, TransactionType } from "../types";
 
 export const PropertyDetails = () => {
   const { id = "" } = useParams();
@@ -18,7 +19,13 @@ export const PropertyDetails = () => {
   const { isConnected, wallet } = useMetaMask();
   const [isApplying, setIsApplying] = useState(false);
 
-  const isApplied = receipts?.some((r) => r.from === wallet.accounts[0]);
+  const isApplied = receipts?.some(
+    (r) =>
+      r.from === wallet.accounts[0] &&
+      r.transactionType === TransactionType.REQUEST_RENTAL
+  );
+  const isRented = property?.status === Status.Rented;
+  const isDisabled = isApplied || isRented;
 
   if (property === undefined) {
     return (
@@ -159,12 +166,16 @@ export const PropertyDetails = () => {
                 ) : (
                   <button
                     onClick={handleApplyToRent}
-                    disabled={isApplied}
+                    disabled={isDisabled}
                     className={`border border-blue-700 text-blue-700 hover:border-blue-600 hover:text-blue-600 rounded p-4 text-sm w-full transition bg-white ${
-                      isApplied ? "opacity-50 cursor-not-allowed" : ""
+                      isDisabled ? "opacity-50 cursor-not-allowed" : ""
                     }`}
                   >
-                    {isApplied ? "Applied" : "Apply for Rent"}
+                    {isRented
+                      ? "Rented"
+                      : isApplied
+                      ? "Applied"
+                      : "Apply to Rent"}
                   </button>
                 )}
               </div>

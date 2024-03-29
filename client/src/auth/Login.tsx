@@ -66,6 +66,13 @@ export const Login = () => {
                 <p className="text-xs text-gray-600">
                   You can only disconnect your account in the MetaMask extension
                 </p>
+                <div className="mt-10">
+                  <hr className="mb-8" />
+                  <h2 className="text-3xl font-semibold text-center mb-8">
+                    My Properties
+                  </h2>
+                  <WalletProperties walletAddress={wallet.accounts[0]} />
+                </div>
               </div>
             ) : (
               <button
@@ -79,13 +86,6 @@ export const Login = () => {
             )}
           </div>
         </div>
-      </div>
-      <div className="mt-10">
-        <hr className="mb-8" />
-        <h2 className="text-3xl font-semibold text-center mb-8">
-          My Properties
-        </h2>
-        <WalletProperties walletAddress={wallet.accounts[0]} />
       </div>
     </div>
   );

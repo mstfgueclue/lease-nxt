@@ -19,8 +19,8 @@ export const WalletProperties = ({ walletAddress }: Properties) => {
 
   if (receipts === undefined || receipts.length === 0) {
     return (
-      <div className="text-center text-3xl text-gray-400 mt-48">
-        Sorry, nothing was found.
+      <div className="text-center text-3xl text-gray-400 mt-20">
+        No properties yet
       </div>
     );
   }

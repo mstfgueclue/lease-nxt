@@ -34,7 +34,7 @@ export const Login = () => {
   return (
     <div className="container mx-auto mb-14">
       <div className="flex justify-center items-start">
-        <div className="w-full max-w-[400px] min-h-[550px]">
+        <div className="w-full max-w-[400px] min-h-[380px]">
           <div className="text-center text-3xl font-semibold mb-8">
             🦊 MetaMask Overview
           </div>
@@ -66,13 +66,6 @@ export const Login = () => {
                 <p className="text-xs text-gray-600">
                   You can only disconnect your account in the MetaMask extension
                 </p>
-                <div className="mt-10">
-                  <hr className="mb-8" />
-                  <h2 className="text-3xl font-semibold text-center mb-8">
-                    My Properties
-                  </h2>
-                  <WalletProperties walletAddress={wallet.accounts[0]} />
-                </div>
               </div>
             ) : (
               <button
@@ -87,6 +80,15 @@ export const Login = () => {
           </div>
         </div>
       </div>
+      {isConnected && (
+        <div>
+          <hr className="mb-8" />
+          <h2 className="text-3xl font-semibold text-center mb-8">
+            My Properties
+          </h2>
+          <WalletProperties walletAddress={wallet.accounts[0]} />
+        </div>
+      )}
     </div>
   );
 };
